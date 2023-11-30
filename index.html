@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beer Explorer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+
+    <header>
+        <h1>Beer Finder</h1>
+    </header>
+
+
+    <div id="app">
+        <div class="search-filter-container">
+            <input type="text" id="search-box" placeholder="Search by name...">
+            <button id="search-button">Search</button>
+            <div>
+                <input type="range" id="filter-abv-min" name="alcohol by volume" min="0" max="55" />
+                <label for="filter-abv-min">minimum ABV</label>
+                <input type="range" id="filter-abv-max" name="alcohol by volume" min="0" max="55" />
+                <label for="filter-abv-max">maximum ABV</label>
+            </div>
+            <!-- <select id="filter-abv">
+                <option value="all">All ABV</option>
+                <option value="low">Below 3.5%</option>
+                <option value="high">Above 3.5%</option>
+            </select> -->
+        </div>
+        <div id="beer-container"></div>
+    </div>
+    <template id="beer-card-template">
+        <div class="beer-card">
+            <img src="" class="beer-image">
+            <div class="beer-info">
+                <h3 class="beer-name"></h3>
+                <p class="beer-abv"></p>
+                <p class="beer-tagline"></p>
+                <button class="like-button">Like</button>
+            </div>
+        </div>
+
+    </template>
+    <footer>
+        <p>© 2023 Beer Finder. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js" defer></script>
+</body>
+
+</html>

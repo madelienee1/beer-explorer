@@ -1,0 +1,145 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, lightblue, white);    
+    box-sizing: border-box;
+    margin: 0;
+}
+
+#app {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+.search-filter-container {
+    display: flex;
+    margin-bottom: 2rem;
+}
+
+#search-box {
+    flex-grow: 1;
+    padding: 1rem;
+    margin-right: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#search-button {
+    padding: 1rem;
+    margin-right: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+#search-button:hover {
+    background-color: #0056b3;
+}
+
+#filter-abv {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+}
+
+#beer-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 20px;
+}
+
+.beer-card {
+    border: 1px solid darkgray;
+    padding: 1.25rem;
+    margin: 1.25rem;
+    text-align: center;
+    width: 12.5rem;
+    overflow: auto;
+    box-shadow: 0 0.125rem 0.3125rem rgba(0, 0, 0, 0.16), 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.08);
+}
+
+.beer-card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.beer-card h2 {
+    font-size: 1.5rem;
+    margin: 1.25rem 0;
+}
+
+.beer-card h3 {
+    margin: 1rem 0;
+}
+
+.beer-card p {
+    font-size: 0.75rem;
+    margin: 10px 0;
+}
+
+
+.beer-info {
+    padding: 1rem;
+}
+
+.beer-name {
+    margin: 0;
+    color: #333;
+}
+
+.beer-abv, .beer-tagline {
+    margin: 5px 0;
+    color: #666;
+}
+
+.like-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.like-button:hover {
+    background-color: #0056b3;
+}
+
+.liked {
+    background-color: orangered;
+    color: white;
+}
+
+
+/* Existing CSS */
+
+header {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 3rem 0;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2em;
+}
+
+footer {
+    background-color: #333;
+    color: cadetblue;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.8em;
+}
