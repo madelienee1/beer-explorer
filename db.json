@@ -1,17 +1,16 @@
 {
-    "beers": [
-      {
-        "id": 1,
-        "name": "Buzz",
-        "tagline": "A Light, Crisp and Bitter IPA Brewed with English and American Hops.",
-        "abv": 4.5
-      },
-      {
-        "id": 2,
-        "name": "Trashy Blonde",
-        "tagline": "A titillating, neurotic, peroxide punk of a Pale Ale.",
-        "abv": 4.1
-      }
-      
-    ]
-  }
+  "likedBeers": [
+    {
+      "id": "4"
+    },
+    {
+      "id": "5"
+    },
+    {
+      "id": "7"
+    },
+    {
+      "id": "8"
+    }
+  ]
+}

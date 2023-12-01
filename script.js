@@ -1,6 +1,33 @@
 // Use const for baseUrl since it's not going to change
 const baseUrl = 'https://api.punkapi.com/v2/beers';
 
+const likeBeer = (id) => {
+    // Make a POST request to add the beer to the likedBeers list
+    fetch('http://localhost:3000/likedBeers', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id: id })
+    });
+}
+
+const getLikedBeers = () => {
+    fetch('http://localhost:3000/likedBeers')
+        .then(response => response.json())
+        .then(ids => {
+            const idsSring = ids.reduce((acc, { id }) => acc + `${id}|`, '');
+            const urlParams = new URLSearchParams({ ids: idsSring });
+
+            // Append params to the base URL
+            fetch(`${baseUrl}?${urlParams.toString()}`)
+                .then(response => response.json())
+                .then(beers => displayBeers(beers))
+                .catch(error => console.error('Error:', error));
+
+        })
+        .catch(error => console.error('Error:', error));
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     const abvMinLabel = document.getElementById('abv-min-label');
@@ -20,31 +47,44 @@ const displayBeers = beers => {
     const beerContainer = document.getElementById('beer-container');
     beerContainer.innerHTML = ''; // clear the container
 
-    beers.forEach(({ image_url, name, tagline, abv, description }) => { // Destructure beer properties
+    beers.forEach(({ image_url, name, tagline, abv, description, id }) => { // Destructure beer properties
         const beerCard = document.createElement('div');
+        const likeButton = document.createElement('button');
+        likeButton.className = 'like-button';
+        likeButton.id = id;
+        likeButton.textContent = 'Like';
+
+        likeButton.addEventListener('click', event => {
+            console.log({ fireEvent: event.target })
+            if (!likeButton.classList.contains('liked')) {
+                likeBeer(event.target.id)
+                likeButton.textContent = 'Liked';
+                likeButton.classList.add('liked');
+            }
+        })
+
+
         beerCard.className = 'beer-card';
         beerCard.innerHTML = `
             <img src="${image_url}">
             <h2>${name}</h2>
             <h3>${tagline}</h3>
             <p><strong>ABV:</strong> ${abv}%</p>
-            <p>${description}</p>
-            <button class="like-button">Like</button>`;
+            <p>${description}</p>`;
+        beerCard.appendChild(likeButton);
         beerContainer.appendChild(beerCard);
+
+
     });
 
     // Use event delegation to handle like button clicks
     // This reduces the number of event listeners and improves performance
-    beerContainer.addEventListener('click', event => {
-        if (event.target.classList.contains('like-button')) {
-            event.target.textContent = 'Liked';
-            event.target.classList.add('liked');
-        }
-    });
+
 }
 
 // Use destructuring to get filter elements
-const [filterAbvMax, filterAbvMin,searchBox] = ['filter-abv-max', 'filter-abv-min','search-box'].map(id => document.getElementById(id));
+const [filterAbvMax, filterAbvMin, searchBox] = ['filter-abv-max', 'filter-abv-min', 'search-box'].map(id => document.getElementById(id));
+
 
 
 // Use Promises for asynchronous operations
@@ -75,7 +115,7 @@ const getBeers = () => {
 
     // Convert params object to a URLSearchParams instance
     const urlParams = new URLSearchParams(params);
-    console.log({urlParams})
+    console.log({ urlParams })
 
     // Append params to the base URL
     fetch(`${baseUrl}?${urlParams.toString()}`)
@@ -94,5 +134,5 @@ searchButton.addEventListener('click', () => {
     searchBox.value = '';
 });
 
-
+document.getElementById('liked-beers-button').addEventListener('click', getLikedBeers);
 getBeers()
