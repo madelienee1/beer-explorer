@@ -20,20 +20,17 @@
         <div class="search-filter-container">
             <input type="text" id="search-box" placeholder="Search by name...">
             <button id="search-button">Search</button>
-            <div>
-                <input type="range" id="filter-abv-min" name="alcohol by volume" min="0" max="55" />
-                <label for="filter-abv-min">minimum ABV</label>
-                <input type="range" id="filter-abv-max" name="alcohol by volume" min="0" max="55" />
-                <label for="filter-abv-max">maximum ABV</label>
-            </div>
-            <!-- <select id="filter-abv">
-                <option value="all">All ABV</option>
-                <option value="low">Below 3.5%</option>
-                <option value="high">Above 3.5%</option>
-            </select> -->
         </div>
-        <div id="beer-container"></div>
+        <div id="abv-slider">
+            <input type="range" id="filter-abv-min" name="filter-abv-min" min="0" max="25" value="0">
+            <label for="filter-abv-min">Min ABV</label>
+            <p id="abv-min-label">Min: 0</p>
+            <input type="range" id="filter-abv-max" name="filter-abv-max" min="26" max="55" value="26">
+            <label for="filter-abv-max">Max ABV</label>
+            <p id="abv-max-label">Max: 55</p>
+        </div>
     </div>
+    <div id="beer-container"></div>
     <template id="beer-card-template">
         <div class="beer-card">
             <img src="" class="beer-image">
@@ -47,7 +44,7 @@
 
     </template>
     <footer>
-        <p>© 2023 Beer Finder. All rights reserved.</p>
+        <p>© 2023 Beer Finder. Madeliene Stiller. All Rights Reserved.</p>
     </footer>
 
     <script src="script.js" defer></script>
