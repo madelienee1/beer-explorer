@@ -1,4 +1,3 @@
-
 const baseUrl = 'https://api.punkapi.com/v2/beers';
 
 
@@ -15,8 +14,8 @@ const displayBeers = beers => {
 
         likeButton.addEventListener('click', event => {
             if (!likeButton.classList.contains('liked')) {
-                likeBeer(event.target.id)
                 likeButton.textContent = 'Liked';
+                likeButton.style.backgroundColor = 'orange';
                 likeButton.classList.add('liked');
             }
         })
@@ -90,6 +89,7 @@ searchButton.addEventListener('click', () => {
     getBeers();
     searchBox.value = '';
 });
+
 
 
 getBeers()
