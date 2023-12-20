@@ -1,10 +1,17 @@
+//base API url
 const baseUrl = 'https://api.punkapi.com/v2/beers';
 
+//function to display beers on the page
+//takes an array of beer objects as an argument
 
 const displayBeers = beers => {
     const beerContainer = document.getElementById('beer-container');
     beerContainer.innerHTML = '';
 
+
+    //creates a div element for each beer object and appends it to the beer-container div
+    //each beer div contains an image, name, tagline, abv, and description
+    //each beer div also contains a button with class 'like-button' and id equal to the beer id
     beers.forEach(({ image_url, name, tagline, abv, description, id }) => {
         const beerCard = document.createElement('div');
         const likeButton = document.createElement('button');
