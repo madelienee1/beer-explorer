@@ -15,14 +15,25 @@ function displayBeers(beers) {
     //loop through each beer and create a card for it
     beers.forEach(({ image_url, name, tagline, abv, description, id }) => {
         const beerCard = document.createElement('div');
+        beerCard.className = 'beer-card';
+        beerCard.innerHTML = `
+        <div class="beer-card">
+            <img src="${image_url}">
+            <h2>${name}</h2>
+            <h3>${tagline}</h3>
+            <p><strong>ABV:</strong> ${abv}%</p>
+            <p>${description}</p>
+            <button id="${id}" class="like-button">Like</button>
+            </div>`;
+
+        //append beer card to container
+        beerContainer.appendChild(beerCard);
+
         //create like button for each beer
-        const likeButton = document.createElement('button');
-        likeButton.className = 'like-button';
-        likeButton.id = id;
-        likeButton.textContent = 'Like';
+        const likeButton = document.getElementById(id);
 
         //add event listener to the button
-        //if it hasn't been clicked, changw text and colour
+        //if it hasn't been clicked, change text and colour
         likeButton.addEventListener('click', event => {
             if (!likeButton.classList.contains('liked')) {
                 likeButton.textContent = 'Liked';
@@ -30,19 +41,6 @@ function displayBeers(beers) {
                 likeButton.classList.add('liked');
             }
         })
-
-        //set class and innerHTML for each card
-        beerCard.className = 'beer-card';
-        beerCard.innerHTML = `
-            <img src="${image_url}">
-            <h2>${name}</h2>
-            <h3>${tagline}</h3>
-            <p><strong>ABV:</strong> ${abv}%</p>
-            <p>${description}</p>`;
-
-        //append likebutton to beer card and beer card to container
-        beerCard.appendChild(likeButton);
-        beerContainer.appendChild(beerCard);
     });
 }
 
