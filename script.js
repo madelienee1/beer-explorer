@@ -43,11 +43,13 @@ const displayBeers = beers => {
     });
 }
 
-
+//function to get beers from API
 const getBeers = () => {
+    //get values from filterAbvMax and filterAbvMin elements
     let abvMax = parseInt(filterAbvMax.value);
     let abvMin = parseInt(filterAbvMin.value);
 
+    //check if abvMin and abvMax are valid numbers
     if (abvMin < 0 || abvMin > 25) {
         console.error('abvMin must be between 0 and 25');
         return;
@@ -56,7 +58,8 @@ const getBeers = () => {
         console.error('abvMax must be between 26 and 55');
         return;
     }
-    //object params with properties abv_gt & abv_lt - used as query parameters to the API request
+
+    //const params is an object with properties abv_gt and abv_lt
     const params = {
         abv_gt: abvMin,
         abv_lt: abvMax
@@ -71,9 +74,11 @@ const getBeers = () => {
         params.beer_name = beerName;
     }
     //create a new URLSearchParams object with the params object as an argument
+    // URLSearchParams is a built in class that generates a query string from an object
     const urlParams = new URLSearchParams(params);
 
     //GET request to API. URL is constructed by appending the query string generated from URLparams to baseurl
+    // response is converted to json and passed to displayBeers function
     fetch(`${baseUrl}?${urlParams.toString()}`)
         .then(response => response.json())
         .then(beers => displayBeers(beers))
