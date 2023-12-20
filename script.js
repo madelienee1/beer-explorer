@@ -11,7 +11,7 @@ const displayBeers = beers => {
 
     //creates a div element for each beer object and appends it to the beer-container div
     //each beer div contains an image, name, tagline, abv, and description
-    //each beer div also contains a button with class 'like-button' and id equal to the beer id
+    //each beer div also contains a 'like' button
     beers.forEach(({ image_url, name, tagline, abv, description, id }) => {
         const beerCard = document.createElement('div');
         const likeButton = document.createElement('button');
@@ -19,7 +19,7 @@ const displayBeers = beers => {
         likeButton.id = id;
         likeButton.textContent = 'Like';
 
-
+        //EVENT LISTENER 1: add event listener to like button that changes the text content and background color of the button when clicked
         likeButton.addEventListener('click', event => {
             if (!likeButton.classList.contains('liked')) {
                 likeButton.textContent = 'Liked';
