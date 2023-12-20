@@ -95,10 +95,20 @@ function getBeers() {
         .catch(error => console.error('Error:', error));
 }
 
-// Add event listeners to the filter elements
-[filterAbvMax, filterAbvMin].forEach(filter => {
-    filter.addEventListener('change', getBeers); //call getBeers when filter is changed
-});
+
+
+//list of all the filter elements
+const filterElements = [filterAbvMax, filterAbvMin];
+//function for when the filter value changes
+function filterChange() {
+    getBeers();
+}
+
+//event listener 'change' to each filter element
+filterElements.forEach(filterElement => {
+    filterElement.addEventListener('change', filterChange);
+})
+
 
 // Add event listener to search button
 searchButton.addEventListener('click', () => {
