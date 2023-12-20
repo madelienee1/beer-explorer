@@ -85,9 +85,19 @@ const getBeers = () => {
         .catch(error => console.error('Error:', error));
 }
 
-const [filterAbvMax, filterAbvMin, searchBox] = ['filter-abv-max', 'filter-abv-min', 'search-box'].map(id => document.getElementById(id));
-//add change event listeners to the filterAbvMax and filterAbvMin elements that call the getBeers function when user changes input
-[filterAbvMax, filterAbvMin].forEach(filter => filter.addEventListener('change', getBeers));
+//get references to elements (filterAbvMax, filterAbvMin, searchBox)
+const filterAbvMax = document.getElementById('filter-abv-max');
+const filterAbvMin = document.getElementById('filter-abv-min');
+const searchBox = document.getElementById('search-box');
+
+//create an array of the filter elements
+const filters = [filterAbvMax, filterAbvMin];
+
+//lop through the array of filter elements and add an event listener to each
+for (let i = 0; i < filters.length; i++) {
+    filters[i].addEventListener('change', getBeers);
+}
+
 
 // document.addEventListener('DOMContentLoaded', () => {
 const abvMinLabel = document.getElementById('abv-min-label');
