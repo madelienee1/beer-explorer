@@ -99,7 +99,6 @@ for (let i = 0; i < filters.length; i++) {
 }
 
 
-// document.addEventListener('DOMContentLoaded', () => {
 const abvMinLabel = document.getElementById('abv-min-label');
 const abvMaxLabel = document.getElementById('abv-max-label');
 
@@ -110,10 +109,6 @@ filterAbvMin.addEventListener('input', () => {
 filterAbvMax.addEventListener('input', () => {
     abvMaxLabel.textContent = `Max: ${filterAbvMax.value}`;
 });
-// });
-
-
-
 
 
 const searchButton = document.getElementById('search-button');
@@ -123,32 +118,4 @@ searchButton.addEventListener('click', () => {
 });
 
 
-
 getBeers()
-
-
-
-// document.getElementById('liked-beers-button').addEventListener('click', getLikedBeers);
-
-// const likeBeer = (id) => {
-//     fetch('http://localhost:3000/likedBeers', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify({ id: id })
-//     });
-// }
-
-// const getLikedBeers = () => {
-//     fetch('http://localhost:3000/likedBeers')
-//         .then(response => response.json())
-//         .then(ids => {
-//             const idsString = ids.reduce((acc, { id }) => acc + (acc ? '|' : '') + id, '');
-//             const urlParams = new URLSearchParams({ ids: idsString });
-//             return fetch(`${baseUrl}?${urlParams.toString()}`);
-//         })
-//         .then(response => response.json())
-//         .then(beers => displayBeers(beers))
-//         .catch(error => console.error('Error:', error));
-// }
