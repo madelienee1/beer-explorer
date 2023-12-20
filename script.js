@@ -28,6 +28,9 @@ const displayBeers = beers => {
             }
         })
 
+        //beer card contains an image, name, tagline, abv, and description
+        // append the like button to the beer card
+        // append the beer card to the beer container
         beerCard.className = 'beer-card';
         beerCard.innerHTML = `
             <img src="${image_url}">
