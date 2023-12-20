@@ -26,10 +26,11 @@ function createBeerCard({ image_url, name, tagline, abv, description, id }) {
 
 //Function to handle like button click event
 function handleLikeButtonClick(event) {
+    //get like button that was clicked and assign it to likeButton
     const likeButton = event.target;
+    //cehck if the like button has the class 'liked'. It it doesn't, code inside of statement will run
     if (!likeButton.classList.contains('liked')) {
         likeButton.textContent = 'Liked';
-        likeButton.style.backgroundColor = 'orange';
         likeButton.classList.add('liked');
     }
 }
@@ -37,14 +38,14 @@ function handleLikeButtonClick(event) {
 //Function to display beers on page
 function displayBeers(beers) {
     beerContainer.innerHTML = '';
-
+    //loop through aech beer and create a card for it
     beers.forEach(beer => {
         const beerCard = createBeerCard(beer);
-
+        //append beer cards to the container
         beerContainer.appendChild(beerCard);
-
+        //create like button for each beer
         const likeButton = document.getElementById(beer.id);
-
+        //add event listener to the button
         likeButton.addEventListener('click', handleLikeButtonClick);
     });
 }
