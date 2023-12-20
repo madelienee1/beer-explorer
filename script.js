@@ -8,15 +8,11 @@ const filterAbvMin = document.getElementById('filter-abv-min');
 const searchBox = document.getElementById('search-box');
 const searchButton = document.getElementById('search-button');
 
-// Function to display beers on the page
-function displayBeers(beers) {
-    beerContainer.innerHTML = '';
-
-    //loop through each beer and create a card for it
-    beers.forEach(({ image_url, name, tagline, abv, description, id }) => {
-        const beerCard = document.createElement('div');
-        beerCard.className = 'beer-card';
-        beerCard.innerHTML = `
+// Function to create beer cards
+function createBeerCard({ image_url, name, tagline, abv, description, id }) {
+    const beerCard = document.createElement('div');
+    beerCard.className = 'beer-card';
+    beerCard.innerHTML = `    
         <div class="beer-card">
             <img src="${image_url}">
             <h2>${name}</h2>
@@ -25,22 +21,31 @@ function displayBeers(beers) {
             <p>${description}</p>
             <button id="${id}" class="like-button">Like</button>
             </div>`;
+    return beerCard;
+}
 
-        //append beer card to container
+//Function to handle like button click event
+function handleLikeButtonClick(event) {
+    const likeButton = event.target;
+    if (!likeButton.classList.contains('liked')) {
+        likeButton.textContent = 'Liked';
+        likeButton.style.backgroundColor = 'orange';
+        likeButton.classList.add('liked');
+    }
+}
+
+//Function to display beers on page
+function displayBeers(beers) {
+    beerContainer.innerHTML = '';
+
+    beers.forEach(beer => {
+        const beerCard = createBeerCard(beer);
+
         beerContainer.appendChild(beerCard);
 
-        //create like button for each beer
-        const likeButton = document.getElementById(id);
+        const likeButton = document.getElementById(beer.id);
 
-        //add event listener to the button
-        //if it hasn't been clicked, change text and colour
-        likeButton.addEventListener('click', event => {
-            if (!likeButton.classList.contains('liked')) {
-                likeButton.textContent = 'Liked';
-                likeButton.style.backgroundColor = 'orange';
-                likeButton.classList.add('liked');
-            }
-        })
+        likeButton.addEventListener('click', handleLikeButtonClick);
     });
 }
 
