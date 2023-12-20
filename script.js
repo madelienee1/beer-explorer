@@ -12,6 +12,7 @@ const displayBeers = beers => {
         likeButton.id = id;
         likeButton.textContent = 'Like';
 
+
         likeButton.addEventListener('click', event => {
             if (!likeButton.classList.contains('liked')) {
                 likeButton.textContent = 'Liked';
@@ -45,43 +46,49 @@ const getBeers = () => {
         console.error('abvMax must be between 26 and 55');
         return;
     }
-
+    //object params with properties abv_gt & abv_lt - used as query parameters to the API request
     const params = {
         abv_gt: abvMin,
         abv_lt: abvMax
     };
 
+    //perform search for beers based on the name entered into search box
     const beerName = searchBox.value;
+
+    //check if beer name is not an empty string after removing whitespace if not empty, adds beer_name as 
+    //a property to the params object with value of beerName
     if (beerName.trim() !== '') {
         params.beer_name = beerName;
     }
-
+    //create a new URLSearchParams object with the params object as an argument
     const urlParams = new URLSearchParams(params);
 
+    //GET request to API. URL is constructed by appending the query string generated from URLparams to baseurl
     fetch(`${baseUrl}?${urlParams.toString()}`)
         .then(response => response.json())
         .then(beers => displayBeers(beers))
         .catch(error => console.error('Error:', error));
 }
 
+const [filterAbvMax, filterAbvMin, searchBox] = ['filter-abv-max', 'filter-abv-min', 'search-box'].map(id => document.getElementById(id));
+//add change event listeners to the filterAbvMax and filterAbvMin elements that call the getBeers function when user changes input
+[filterAbvMax, filterAbvMin].forEach(filter => filter.addEventListener('change', getBeers));
 
-document.addEventListener('DOMContentLoaded', () => {
-    const abvMinLabel = document.getElementById('abv-min-label');
-    const abvMaxLabel = document.getElementById('abv-max-label');
+// document.addEventListener('DOMContentLoaded', () => {
+const abvMinLabel = document.getElementById('abv-min-label');
+const abvMaxLabel = document.getElementById('abv-max-label');
 
-    filterAbvMin.addEventListener('input', () => {
-        abvMinLabel.textContent = `Min: ${filterAbvMin.value}`;
-    });
-
-    filterAbvMax.addEventListener('input', () => {
-        abvMaxLabel.textContent = `Max: ${filterAbvMax.value}`;
-    });
+filterAbvMin.addEventListener('input', () => {
+    abvMinLabel.textContent = `Min: ${filterAbvMin.value}`;
 });
 
+filterAbvMax.addEventListener('input', () => {
+    abvMaxLabel.textContent = `Max: ${filterAbvMax.value}`;
+});
+// });
 
-const [filterAbvMax, filterAbvMin, searchBox] = ['filter-abv-max', 'filter-abv-min', 'search-box'].map(id => document.getElementById(id));
 
-[filterAbvMax, filterAbvMin].forEach(filter => filter.addEventListener('change', getBeers));
+
 
 
 const searchButton = document.getElementById('search-button');
