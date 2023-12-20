@@ -12,13 +12,17 @@ const searchButton = document.getElementById('search-button');
 function displayBeers(beers) {
     beerContainer.innerHTML = '';
 
+    //loop through each beer and create a card for it
     beers.forEach(({ image_url, name, tagline, abv, description, id }) => {
         const beerCard = document.createElement('div');
+        //create like button for each beer
         const likeButton = document.createElement('button');
         likeButton.className = 'like-button';
         likeButton.id = id;
         likeButton.textContent = 'Like';
 
+        //add event listener to the button
+        //if it hasn't been clicked, changw text and colour
         likeButton.addEventListener('click', event => {
             if (!likeButton.classList.contains('liked')) {
                 likeButton.textContent = 'Liked';
@@ -27,6 +31,7 @@ function displayBeers(beers) {
             }
         })
 
+        //set class and innerHTML for each card
         beerCard.className = 'beer-card';
         beerCard.innerHTML = `
             <img src="${image_url}">
@@ -34,6 +39,8 @@ function displayBeers(beers) {
             <h3>${tagline}</h3>
             <p><strong>ABV:</strong> ${abv}%</p>
             <p>${description}</p>`;
+
+        //append likebutton to beer card and beer card to container
         beerCard.appendChild(likeButton);
         beerContainer.appendChild(beerCard);
     });
@@ -62,7 +69,7 @@ function getBeers() {
         return;
     }
 
-    // Prepare parameters for API request
+    // parameters for API request
     const params = {
         abv_gt: abvMin,
         abv_lt: abvMax
@@ -86,12 +93,12 @@ function getBeers() {
 
 // Add event listeners to the filter elements
 [filterAbvMax, filterAbvMin].forEach(filter => {
-    filter.addEventListener('change', getBeers);
+    filter.addEventListener('change', getBeers); //call getBeers when filter is changed
 });
 
 // Add event listener to search button
 searchButton.addEventListener('click', () => {
-    getBeers();
+    getBeers(); //call getBeers when search button is clicked
     searchBox.value = '';
 });
 
